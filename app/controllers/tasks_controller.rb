@@ -1,24 +1,23 @@
 class TasksController < ApplicationController
-  respond_to :json
 
   def index
-    respond_with Task.all
+    render json: Task.all
   end
 
   def show
-    respond_with Task.find(params[:id])
+    render json: Task.find(params[:id])
   end
 
   def create
-    respond_with Task.create(task_params)
+    render json: Task.create(task_params)
   end
 
   def update
-    respond_with Task.update(params[:id], task_params)
+    render json: Task.update(params[:id], task_params)
   end
 
   def destroy
-    respond_with Task.destroy(params[:id])
+    render json: Task.destroy(params[:id])
   end
 
 private

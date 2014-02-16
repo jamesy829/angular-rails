@@ -1,8 +1,10 @@
-angular.module('Todo', ['ngResource']);
+app = angular.module('Todo', ['ngResource']);
 
-function TodoCtrl($scope, $resource) {
-  var Task;
-  Task = $resource('/tasks/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
+app.factory('Task', function($resource) {
+  return $resource('/tasks/:id', {id: '@id'}, {update: {method: 'PUT'}});
+})
+
+app.controller('TodoCtrl', function($scope, Task) {
   $scope.tasks = Task.query();
 
   $scope.addTask = function() {
@@ -32,4 +34,4 @@ function TodoCtrl($scope, $resource) {
     task.completed = !task.completed;
     task.$update();
   }
-};
+});
