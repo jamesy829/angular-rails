@@ -1,11 +1,14 @@
-function TodoCtrl($scope) {
-  $scope.tasks = [
-    {text:'learn angular', completed: 'false'},
-    {text:'test angular', completed: 'false'}
-  ];
+angular.module('Todo', ['ngResource']);
+
+function TodoCtrl($scope, $resource) {
+  var Task;
+  Task = $resource('/tasks/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
+  $scope.tasks = Task.query();
 
   $scope.addTask = function() {
-    $scope.tasks.push({text: $scope.newTask.text, completed: 'false'});
+    var task;
+    task = Task.save({text: $scope.newTask.text, completed: 'false'});
+    $scope.tasks.push(task);
     $scope.newTask = '';
   };
 
@@ -24,4 +27,9 @@ function TodoCtrl($scope) {
       if (!task.completed) $scope.tasks.push(task);
     });
   };
-}
+
+  $scope.mark = function(task) {
+    task.completed = !task.completed;
+    task.$update();
+  }
+};

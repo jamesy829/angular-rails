@@ -12,5 +12,11 @@
 
   %ul{style: 'list-style: none;'}
     %li{'ng-repeat' => 'task in tasks'}
-      %input{type: 'checkbox', 'ng-model' => 'task.completed'}
+      %input{type: 'checkbox', 'ng-model' => 'task.completed', 'ng-click' => 'mark(task)'}
       %span{class: 'done-{{task.completed}}'}{{task.text}}
+
+:css
+  .done-true {
+    text-decoration: line-through;
+    color: grey;
+  }
