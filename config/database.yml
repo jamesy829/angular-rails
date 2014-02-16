@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: angular-rails_development
   pool: 5
-  username: angular-rails
+  username: jameshuang
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: angular-rails_test
   pool: 5
-  username: angular-rails
+  username: jameshuang
   password:
 
 production:
